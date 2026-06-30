@@ -1,63 +1,65 @@
 # AI Governance Risk Register & Scoring Methodology
 
-*Community edition — grounded in the FINOS AI Governance Framework (AIGF) v2*
+*Based on the FINOS AI Governance Framework (AIGF)*
 
-This document explains the methodology behind the accompanying workbook (`AIGF_Risk_Register.xlsx`). It is intended for AI governance practitioners, risk and compliance teams, and the wider community adopting the FINOS framework. It is vendor-neutral and free to adapt.
-
----
-
-## 1. Why this register exists
-
-Most AI risk inventories are either too abstract ("AI might be biased") to act on, or too bespoke to share. This register takes a middle path: every entry is mapped to a **canonical FINOS AIGF v2 risk ID** (`AIR-OP-*`, `AIR-SEC-*`, `AIR-RC-*`), so a finding raised in one organisation means the same thing in another, and stays traceable to an open, community-maintained source. The framework currently spans operational, security, and regulatory domains, including a dedicated agentic-AI risk set introduced in v2 to cover autonomous, tool-using systems.
-
-The workbook turns that catalogue into something operational: a scored register, a deployment gate, lifecycle triggers, and a shared glossary.
+This document explains the methodology behind the accompanying workbook (`AIGF_Risk_Register.xlsx`). It is intended for AI governance practitioners, risk and compliance teams, and the wider community aligned with FINOS framework. It is vendor agnostic and free to adapt.
 
 ---
 
-## 2. The scoring model
+## 1. Why this register exists.
+
+Most AI risk inventories are either too abstract ("AI might be biased") to act on, or too bespoke to share. This register takes a middle path: attempted mappings made to a **canonical FINOS AIGF risk ID**, so a finding raised in one organization implies the same thing in another, and stays traceable to an open, community-maintained source. The framework currently spans operational, security, and regulatory domains, including an agentic-AI risk set to cover autonomous systems that use tools.
+
+The workbook attempts to turn the catalog into an operational asset comprising of a scored register, a deployment gate, lifecycle triggers, and a shared glossary.
+
+---
+
+## 2. The scoring approach
 
 ### Inherent risk = Likelihood × Impact
 
-Each risk is scored on two independent 1–5 axes and multiplied, producing a 1–25 inherent score. The anchors are deliberately behavioural rather than numeric so two assessors land in the same place.
+Each risk is scored on two independent axes levels 1-5, and the matrix creates a 1–25 inherent score. The anchors are intentionally behavioral rather than numeric so two assessors can land in the same place.
 
-**Likelihood (1–5):** Rare → Unlikely → Possible → Likely → Almost Certain.
-**Impact (1–5):** Insignificant → Minor → Moderate → Major → Severe.
+**Likelihood scores of 1-5:** Rare → Unlikely → Possible → Likely → High Probability (Certainty).
+**Impact scores of 1-5:** Insignificant → Minor → Moderate → Major → Severe.
 
-Full descriptor anchors are on the *Scoring Methodology* tab and visualised on the *Scoring Matrix* tab.
+Full descriptor anchors are on the *Scoring Approach* tab and visualized on the *Scoring Matrix* tab.
 
 ### Rating bands
 
-| Score | Rating | Governance posture |
+| Range | Rating | Governance consideration |
 |------|--------|--------------------|
 | 1–4 | Low | Acceptable with baseline controls and routine oversight |
 | 5–9 | Moderate | Acceptable with standard guardrails, monitoring, periodic review |
 | 10–15 | High | Deploy only with mandatory controls, approval gates, active monitoring |
-| 16–25 | Critical | Do not deploy as-is; redesign to reduce exposure or require human-in-the-loop |
+| 16–25 | Critical | Do not deploy as-is; redesign to reduce exposure or require human-in-the-loop Go-no-go. (if deployed - Kill)|
 
 ### Control effectiveness → residual risk
 
-Inherent risk is *gross* exposure. To get the risk you actually accept, rate existing controls on a 1–5 effectiveness scale; the register applies a mitigation factor:
+Rate the effectiveness of existing controls on a 1-5 scale (1 = Ineffective through 5 = Fully effective). reduces exposure. 	
+Residual Score = Inherent Score × Mitigation Factor, where the increase in controls recudce exposure.	
+Governance forum reviews and escalates/makes decision on residual risk.	
 
-| Effectiveness | Meaning | Factor |
+| Level | Effectiveness Level Rating | Implication | Factor |
 |---------------|---------|--------|
-| 1 — Ineffective | Controls absent or untested | ×1.00 |
-| 2 — Limited | Partial / ad-hoc | ×0.80 |
-| 3 — Moderate | Standard, some gaps | ×0.60 |
-| 4 — Strong | Robust, tested | ×0.40 |
-| 5 — Fully effective | Comprehensive, continuously assured | ×0.25 |
+| 1 | Ineffective | Controls absent or untested | ×1.00 |
+| 2 | Limited | Partial / ad-hoc | ×0.80 |
+| 3 | Moderate | Standard, some gaps | ×0.60 |
+| 4 | Strong | Robust, tested | ×0.40 |
+| 5 | Fully effective | Comprehensive, continuously assured | ×0.25 |
 
 **Residual Score = Inherent Score × Mitigation Factor**, then re-banded against the same table. The workbook computes this automatically.
 
-### Deployment gate
+### Risk Tolerance Deployment Gate (go-no-go)
 
 Residual rating drives a go/no-go decision and the sign-off it requires:
 
-| Residual rating | Stance | Gate | Sign-off |
+| Residual rating | Tolerance Stance | Rating | Gate | Sign-off |
 |-----------------|--------|------|----------|
 | Low | Accept | PASS | Product / risk owner |
-| Moderate | Accept w/ monitoring | PASS with conditions | AI governance lead |
-| High | Mitigate before deploy | CONDITIONAL | Governance forum / CRO delegate |
-| Critical | Avoid / redesign | FAIL — block | Governance forum + accountable executive |
+| Moderate | Accept w/ monitoring | PASS| with conditions | AI governance lead |
+| High | Mitigate before deploy | CONDITIONAL | controls needed | Governance forum / CRO delegate |
+| Critical | Avoid / redesign | FAIL | block / Kill | Governance forum + accountable executive |
 
 Tolerance bands are a starting point — calibrate them to your own risk appetite.
 
@@ -65,22 +67,23 @@ Tolerance bands are a starting point — calibrate them to your own risk appetit
 
 ## 3. What's in the register
 
-31 risks across four core domains, plus seven added by stack-coverage validation (see 6c) — 38 in total — each carrying its FINOS reference, description, potential impact, inherent and residual scoring, existing controls, **treatment**, **FINOS coverage**, **stack layer**, owner, and status.
+31 risks across four core domains, plus seven added by stack-coverage validation (see 6c) — 38 in total — each carrying its FINOS reference, description, potential impact, inherent and residual scoring, existing controls, **addressing the risk**, **FINOS coverage**, **stack layer**, owner, and status.
 
+Possible categorization
 - **Operational (11):** hallucination, model versioning, non-determinism, availability, alignment, bias, explainability, overreach, data drift, reputational risk, multi-agent trust boundaries.
 - **Security (10):** leakage to hosted models and vector stores, model tampering, data poisoning, prompt injection, and the agentic set — authorization bypass, tool-chain injection, MCP supply-chain compromise, state-persistence poisoning, credential harvesting.
 - **Regulatory (3):** regulatory compliance & oversight, IP & copyright, data-protection & privacy compliance.
 - **Agent Operations (7):** the agent-specific and connected-agent risks — see section 3a.
 
-Input cells (Likelihood, Impact, Control Effectiveness, Treatment, Status) are shaded; every score, rating, and rollup is a live formula. Colour-coded conditional formatting flags ratings automatically.
+Input cells (Likelihood, Impact, Control Effectiveness, Treatment, Status) are shaded; every score, rating, and rollup is a live formula. Color-coded conditional formatting flags ratings automatically.
 
 ## 3a. Agent Operations risks
 
-These cover behaviours that emerge once models act autonomously and depend on each other:
+These cover behaviors that emerge once models act autonomously and depend on each other:
 
 - **R-25 Autonomous Decision-Making Beyond Mandate** — agent decides/acts outside its approved decision rights.
 - **R-26 Outcome Deviation & Detection Gap** — outputs drift from expected outcomes and detection lags (especially when the agent self-reports success).
-- **R-27 Pattern-Shift Rejected as Anomaly** — a genuine new-normal data shift is rejected as an anomaly, so the agent fails to adapt and acts on stale normalised values.
+- **R-27 Pattern-Shift Rejected as Anomaly** — a genuine new-normal data shift is rejected as an anomaly, so the agent fails to adapt and acts on stale normalized values.
 - **R-28 Fabricated Outcome Under Inability to Respond** — when the agent can't produce a valid answer it guesses/fabricates instead of failing safe (rated Critical).
 - **R-29 Cascading Deviation in Connected Agents (No Rollback)** — a dependent agent ingests corrupt/skewed/fabricated input and propagates a hard-to-detect sequence of deviations with no rollback path. Requires mandatory pre-release review.
 - **R-30 Result Skew from Upstream Agent Non-Response** — upstream agent times out / returns empty; the dependent agent proceeds on incomplete input and skews its result.
@@ -149,7 +152,7 @@ This surfaced a clear pattern: FINOS is strong at the model, data, orchestration
 
 Each is flagged `GAP` (or `FINOS-adjacent`) in the FINOS Coverage column and logged in the Gap Register (G-04 to G-07). With these added, all ten stack layers carry at least one mapped risk. The data-risk layers (L4–L5) are highlighted in red on the validation tab, mirroring the architecture's elevated data-risk zone — consistent with the principle that data risk is upstream, invisible at the moment of harm, and expensive to remediate.
 
-## 7. Adapting this for your organisation
+## 7. Adapting this for your organization
 
 - **Tolerance is yours to set.** The gate thresholds above reflect a moderately conservative stance; adjust them.
 - **Scope before you score.** Not every risk applies to every use case — select the relevant subset based on data classes, autonomy level, and external exposure.
