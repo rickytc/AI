@@ -1,0 +1,20 @@
+AI sandbox should have for regulated financial-services, risk, governance, or agentic use.
+
+Guiding principles (draft):
+
+Isolation by default and connectivity is treated as an exception.
+Anything the model learns, accesses, creates or is permitted to do should not be allowed to become a production capability.
+Production capabilities must be explicitly authorized, tested, bounded, and independently enforced outside the model.
+Least privilege, least access and least autonomy.
+Security and governance controls must be enforced by deterministic external systems.
+Agents accountable for identities, not extensions of users. Agents actions should track back to users.
+Scope is fixed, ambiguity should be resolved by humans.
+All assumptions must be visible.
+All agents including temporary creations as part of a process must have audit trail.
+All data classification should be tracked throughout the lifecycle of operating in the model.
+Behaviors should be fully tested and not just limited to output.
+Untested = Untrusted.
+Humans decide the irreversible, reversibility is a prerequisite.
+End-to-end governance implementation not limited to checkpoints.
+Full transparency of operations and controls.
+Autonomy should be restricted, fully auditable lifecycle, physical isolation of sandbox, nothing leaves the sandbox independently - any operation conducted by AI leaving the sandbox should follow strict restrictions and be fully monitored.
